@@ -298,7 +298,7 @@ function panelon() {
   [ $SYSTEMTYPE = arm ] && [ ! -f ${PanelDir}/ttyd ] && cp -f ${PanelDir}/webshellbinary/ttyd.arm ${PanelDir}/ttyd && [ ! -x ${PanelDir}/ttyd ] && chmod +x ${PanelDir}/ttyd && echo 1
   [ ! $SYSTEM = Android ] && [ ! -f ${PanelDir}/ttyd ] && cp -f ${PanelDir}/webshellbinary/ttyd.$(uname -m) ${PanelDir}/ttyd && [ ! -x ${PanelDir}/ttyd ] && chmod +x ${PanelDir}/ttyd echo 1
 
-
+  paneloff
   cd ${PanelDir}
   if type pm2 >/dev/null 2>&1; then
     pm2 start ${PanelDir}/ttyd --name="WebShell" -- -p 9999 -t fontSize=14 -t disableLeaveAlert=true -t rendererType=webgl bash >/dev/null 2>&1 &
