@@ -47,6 +47,7 @@ fi
 
 echo -e "========================4. 启动控制面板========================\n"
 if [[ ${ENABLE_WEB_PANEL} == true ]]; then
+  pm2 start ${JD_DIR}/panel/ttyd --name="WebShell" -- -p 9999 -t fontSize=14 -t disableLeaveAlert=true -t rendererType=webgl bash
   pm2 start ${JD_DIR}/panel/server.js
   echo -e "控制面板启动成功...\n"
   echo -e "如未修改用户名密码，则初始用户名为：admin，初始密码为：adminadmin\n"
