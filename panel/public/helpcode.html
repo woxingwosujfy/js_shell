@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>在线更新工具 · JS-TOOL</title>
+    <title>手动互助码填写区域 · JS-TOOL</title>
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/codemirror.min.js"></script>
     <script type="text/javascript" src="./js/shell.js"></script>
@@ -23,7 +23,6 @@
     <div class="container">
         <div class="diffs">
             <nav>
-                <ul>
                     <li><a href="./home">配置设定</a></li>
                     <li><a href="./crontab">定时设定</a></li>
                     <li><a href="./diff">更新工具</a></li>
@@ -41,9 +40,9 @@
                 <button id="prev" title="上一个差异">上一个差异</button>
                 <button id="next" title="下一个差异">下一个差异</button>
                 <button id="wrap" title="切换换行">切换换行</button>
-                <button id="save" title="保存">保存 config.sh</button>
+                <button id="save" title="保存">保存 sharecode.sh</button>
             </header>
-            <h4>左侧为 config.sh ，右侧为 config.sh.sample</h4>
+            <h4>左侧为 sharecode.sh ，右侧为 sharecode.sh.sample</h4>
             <div class="compare-wrapper">
                 <div id="compare">
                 </div>
@@ -51,8 +50,8 @@
             <div class="sources">
                 <p>查看源文件，注意将浏览器编码切换为 UTF-8 。</p>
                 <ul>
-                    <li><a id="file1" target="_blank" href="./api/config/config">查看 config.sh</a></li>
-                    <li><a id="file2" target="_blank" href="./api/config/sample">查看 config.sh.sample</a></li>
+                    <li><a id="file1" target="_blank" href="./api/config/config">查看 sharecode.sh</a></li>
+                    <li><a id="file2" target="_blank" href="./api/config/sample">查看 sharecode.sh.sample</a></li>
                 </ul>
             </div>
         </div>
@@ -78,7 +77,7 @@
             });
         }
 
-        Promise.all([$.get('./api/config/config'), $.get('./api/config/sample')])
+        Promise.all([$.get('./api/config/helpcode'), $.get('./api/config/sample')])
             .then((resArr) => {
                 origLeft = resArr[0];
                 origRight = resArr[1];
