@@ -84,6 +84,7 @@ function SourceUrl_Update {
 }
 
 fix_files() {
+    [ ! -d ${ShellDir}/config ] && mkdir -p ${ShellDir}/config
     [ -d $oldScripts2Dir ] && rm -rf $oldScripts2Dir
     [ ! -f $FileConf ] && cp -f $FileConfSample $FileConf
     [ ! -f $ListCron ] && cp -f $FileListCronSample $ListCron
