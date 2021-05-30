@@ -22,6 +22,7 @@ FileConftemp=${ConfigDir}/config.sh.temp
 FileDiy=${ConfigDir}/diy.sh
 FileConfSample=${ShellDir}/sample/config.sh.sample
 ListCron=${ConfigDir}/crontab.list
+FileListCronSample=${ShellDir}/sample/crontab.list.sample
 ListCronLxk=${ScriptsDir}/docker/crontab_list.sh
 ListCronShylocks=${Scripts2Dir}/docker/crontab_list.sh
 ListTask=${LogDir}/task.list
@@ -84,6 +85,8 @@ function SourceUrl_Update {
 
 fix_files() {
     [ -d $oldScripts2Dir ] && rm -rf $oldScripts2Dir
+    [ ! -f $FileConf ] && cp -f $FileConfSample $FileConf
+    [ ! -f $ListCron ] && cp -f $FileListCronSample $ListCron
 }
 
 ## 更新crontab，gitee服务器同一时间限制5个链接，因此每个人更新代码必须错开时间，每次执行git_pull随机生成。
