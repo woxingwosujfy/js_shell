@@ -111,6 +111,8 @@ function Update_Cron() {
     perl -i -pe "s|.+(bash.+git_pull.+log.*)|${RanMin} ${RanHour} \* \* \* sleep ${RanSleep} && \1|" ${ListCron}
     perl -i -pe "s|5 7,23 19-25 2 .* (.+jd_nzmh\W*.*)|5 7,23 19-25 2 * bash \1|" ${ListCron} # 紧急修复错误的cron
     perl -i -pe "s|30 8-20/4(.+jd_nian\W*.*)|28 8-20/4,21\1|" ${ListCron}                    # 修改默认错误的cron
+    perl -i -pe "s|13 0-23/2(.+jd_zoo\W*.*)|33 0,6-23/2 \1|" ${ListCron}                    # 修改默认错误的cron
+    perl -i -pe "s|33 \* (.+jd_zoo\W*.*)|33 0,6-23/2 \1|" ${ListCron}                    # 修改默认错误的cron
     crontab ${ListCron}
   fi
 }
