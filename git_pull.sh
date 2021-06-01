@@ -114,9 +114,10 @@ function Update_Cron() {
 
     perl -i -pe "s|0-59/30(.+jd_zooCollect\W*.*)|#0-59/30\1|" ${ListCron}
     perl -i -pe "s|33 0,6-23/2(.+jd_zooCollect\W*.*)|#0-59/30\1|" ${ListCron}
-    perl -i -pe "s|##0-59/30(.+jd_zooCollect\W*.*)|#0-59/30\1|" ${ListCron}
     perl -i -pe "s|##0-58/30(.+jd_zooCollect\W*.*)|#0-59/30\1|" ${ListCron}
-    
+    perl -i -pe "s|##0-59/30(.+jd_zooCollect\W*.*)|#0-59/30\1|" ${ListCron}
+    perl -i -pe "s|##0-59/30(.+jd_zooCollect\W*.*)|#0-59/30\1|" ${ListCron}
+
     perl -i -pe "s|13 0-23/2(.+jd_zoo\W*.*)|33 0,6-23/2 \1|" ${ListCron}
     perl -i -pe "s|33 \* (.+jd_zoo\W*.*)|33 0,6-23/2 \1|" ${ListCron}
     crontab ${ListCron}
