@@ -113,6 +113,9 @@ function Update_Cron() {
     #perl -i -pe "s|0-59/30(.+jd_zooCollect\W*.*)|20,40\1|"  ${ListCron}
     #perl -i -pe "s|33 0,6-23/2(.+jd_zoo\W*.*)|1 \*\1|" ${ListCron}
 
+    crontab -r
+    rm -rf ${ListCron}
+    cp -f $FileListCronSample $ListCron
     crontab ${ListCron}
   fi
 }
