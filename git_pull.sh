@@ -229,14 +229,14 @@ function Diff_Cron {
 ## 发送删除失效定时任务的消息
 function Notify_DropTask {
   cd ${ShellDir}
-  #node update.js
+  node update.js
   [ -f ${ContentDropTask} ] && rm -f ${ContentDropTask}
 }
 
 ## 发送新的定时任务消息
 function Notify_NewTask {
   cd ${ShellDir}
-  #node update.js
+  node update.js
   [ -f ${ContentNewTask} ] && rm -f ${ContentNewTask}
 }
 
@@ -508,7 +508,7 @@ echo -e "+-----------------------------------------------------------+"
 ## 检测配置文件链接
 SourceUrl_Update
 fix_files
-fix_config
+#fix_config
 ## 更新shell脚本、检测配置文件版本并将sample/config.sh.sample复制到config目录下
 Git_PullShell && Update_Cron
 VerConfSample=$(grep " Version: " ${FileConfSample} | perl -pe "s|.+v((\d+\.?){3})|\1|")
