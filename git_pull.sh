@@ -111,7 +111,7 @@ function Update_Cron() {
     perl -i -pe "s|.+(bash.+git_pull.+log.*)|${RanMin} ${RanHour} \* \* \* sleep ${RanSleep} && \1|" ${ListCron}
 
     perl -i -pe "s|.*(.+jd_zooCollect\W*.*)|20,40 \* \* \* \* \1|" ${ListCron}
-    perl -i -pe "s|.*(.+jd_zoo \W*.*)|1 \* \* \* \* \1|" ${ListCron}
+    perl -i -pe "s|.*(.+jd_zoo\W*.*)|1 \* \* \* \* \1|" ${ListCron}
 
     crontab ${ListCron}
   fi
