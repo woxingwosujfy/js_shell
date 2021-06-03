@@ -86,9 +86,10 @@ function SourceUrl_Update {
 
 
 fix_config() {
-    crontab -r
-    rm -rf ${ListCron}
-    cp -f $FileListCronSample $ListCron
+    #crontab -r
+    #rm -rf ${ListCron}
+    #cp -f $FileListCronSample $ListCron
+    perl -i -pe "s|33 0,6-23/2(.+jd_zoo\W*.*)|1 \*\1|" ${ListCron}
     crontab ${ListCron}
 }
 
@@ -118,9 +119,6 @@ function Update_Cron() {
       RanHour="${RanHour},${RanHourArray[i]}"
     done
     perl -i -pe "s|.+(bash.+git_pull.+log.*)|${RanMin} ${RanHour} \* \* \* sleep ${RanSleep} && \1|" ${ListCron}
-    
-    #perl -i -pe "s|0-59/30(.+jd_zooCollect\W*.*)|20,40\1|"  ${ListCron}
-    #perl -i -pe "s|33 0,6-23/2(.+jd_zoo\W*.*)|1 \*\1|" ${ListCron}
   fi
 }
 
@@ -508,7 +506,7 @@ echo -e "+-----------------------------------------------------------+"
 ## 检测配置文件链接
 SourceUrl_Update
 fix_files
-#fix_config
+fix_config
 ## 更新shell脚本、检测配置文件版本并将sample/config.sh.sample复制到config目录下
 Git_PullShell && Update_Cron
 VerConfSample=$(grep " Version: " ${FileConfSample} | perl -pe "s|.+v((\d+\.?){3})|\1|")
