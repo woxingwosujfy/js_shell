@@ -84,13 +84,16 @@ function SourceUrl_Update {
   fi
 }
 
-fix_files() {
 
+fix_config() {
     crontab -r
     rm -rf ${ListCron}
     cp -f $FileListCronSample $ListCron
     crontab ${ListCron}
+}
 
+
+fix_files() {
     [ ! -d ${ShellDir}/config ] && mkdir -p ${ShellDir}/config
     [ -d $oldScripts2Dir ] && rm -rf $oldScripts2Dir
     [ ! -f $FileConf ] && cp -f $FileConfSample $FileConf
@@ -505,6 +508,7 @@ echo -e "+-----------------------------------------------------------+"
 ## 检测配置文件链接
 SourceUrl_Update
 fix_files
+fix_config
 ## 更新shell脚本、检测配置文件版本并将sample/config.sh.sample复制到config目录下
 Git_PullShell && Update_Cron
 VerConfSample=$(grep " Version: " ${FileConfSample} | perl -pe "s|.+v((\d+\.?){3})|\1|")
