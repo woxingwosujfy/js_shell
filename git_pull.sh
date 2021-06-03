@@ -109,10 +109,6 @@ function Update_Cron() {
       RanHour="${RanHour},${RanHourArray[i]}"
     done
     perl -i -pe "s|.+(bash.+git_pull.+log.*)|${RanMin} ${RanHour} \* \* \* sleep ${RanSleep} && \1|" ${ListCron}
-
-    sed -i '/jd_zoo/d' ${ListCron}
-    echo "20,40 * * * * bash ${ShellJd} jd_zooCollect" >> ${ListCron}
-    echo "1 * * * * bash ${ShellJd} jd_zoo" >> ${ListCron}
     
     #perl -i -pe "s|0-59/30(.+jd_zooCollect\W*.*)|20,40\1|"  ${ListCron}
     #perl -i -pe "s|33 0,6-23/2(.+jd_zoo\W*.*)|1 \*\1|" ${ListCron}
