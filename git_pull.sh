@@ -90,10 +90,8 @@ fix_config() {
     #rm -rf ${ListCron}
     #cp -f $FileListCronSample $ListCron
     perl -i -pe "{
-        s|33 0,6-23/2 (.+jd_zoo\W*.*)|1 \* \1|g;
-        s|1 \* (.+jd_zoo\W*.*)|0 \*\/2 \1|g;
-        s|33 \* (.+jd_zoo\W*.*)|33 \*\/2 \1|g;
-        s|0-59/30 (.+jd_zooCollect\W*.*)|20,40 \1|g;
+      s|.+(jd(\.sh)? jd_zoo)|0 \*\/2 \* \* \* \1|g;
+      s|.+(jd(\.sh)? jd_zooCollect)|20,40 \* \* \* \* \1|g;
     }" ${ListCron}
     crontab ${ListCron}
 }
