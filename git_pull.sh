@@ -84,44 +84,46 @@ function SourceUrl_Update {
   fi
 }
 
-
 fix_config() {
-    #crontab -r
-    #rm -rf ${ListCron}
-    #cp -f $FileListCronSample $ListCron
-    perl -i -pe "{
+  #crontab -r
+  #rm -rf ${ListCron}
+  #cp -f $FileListCronSample $ListCron
+  perl -i -pe "{
       s|.+(jd(\.sh)? jd_zoo)|0 \*\/2 \* \* \* \1|g;
       s|.+(jd(\.sh)? jd_zooCollect)|20,40 \* \* \* \* \1|g;
     }" ${ListCron}
-    crontab ${ListCron}
+  crontab ${ListCron}
 }
 
-
 fix_files() {
-    [ ! -d ${ShellDir}/config ] && mkdir -p ${ShellDir}/config
-    [ -d $oldScripts2Dir ] && rm -rf $oldScripts2Dir
-    [ ! -f $FileConf ] && cp -f $FileConfSample $FileConf
-    [ ! -f $ListCron ] && cp -f $FileListCronSample $ListCron
-    [ ! -f $FileDiy ] && cp -f $FileDiySample $FileDiy
+  [ ! -d ${ShellDir}/config ] && mkdir -p ${ShellDir}/config
+  [ -d $oldScripts2Dir ] && rm -rf $oldScripts2Dir
+  [ ! -f $FileConf ] && cp -f $FileConfSample $FileConf
+  [ ! -f $ListCron ] && cp -f $FileListCronSample $ListCron
+  [ ! -f $FileDiy ] && cp -f $FileDiySample $FileDiy
 }
 
 ## 更新crontab，gitee服务器同一时间限制5个链接，因此每个人更新代码必须错开时间，每次执行git_pull随机生成。
 ## 每天次数随机，更新时间随机，更新秒数随机，至少6次，至多12次，大部分为8-10次，符合正态分布。
 function Update_Cron() {
-  if [[ $(date "+%-H") -le 2 ]] && [ -f ${ListCron} ]; then
-    RanMin=$((${RANDOM} % 60))
-    RanSleep=$((${RANDOM} % 56))
-    RanHourArray[0]=$((${RANDOM} % 3))
+  if [ -f ${ListCron} ]; then
+    local random_min=$((${RANDOM} % 60))
+    local random_sleep=$((${RANDOM} % 56))
+    local random_hour_array[0]=$((${RANDOM} % 3))
+    local random_hour=${random_hour_array[0]}
+    local i j tmp
+
     for ((i = 1; i < 14; i++)); do
       j=$(($i - 1))
-      tmp=$((${RANDOM} % 3 + ${RanHourArray[j]} + 2))
-      [[ ${tmp} -lt 24 ]] && RanHourArray[i]=${tmp} || break
+      tmp=$(($(gen_random_num 3) + ${random_hour_array[j]} + 4))
+      [[ $tmp -lt 24 ]] && random_hour_array[i]=$tmp || break
     done
-    RanHour=${RanHourArray[0]}
-    for ((i = 1; i < ${#RanHourArray[*]}; i++)); do
-      RanHour="${RanHour},${RanHourArray[i]}"
+
+    for ((i = 1; i < ${#random_hour_array[*]}; i++)); do
+      random_hour="$random_hour,${random_hour_array[i]}"
     done
-    perl -i -pe "s|.+(bash.+git_pull.+log.*)|${RanMin} ${RanHour} \* \* \* sleep ${RanSleep} && \1|" ${ListCron}
+    perl -i -pe "s|.+(bash.+git_pull.+log.*)|22,44 \* \* \* \* sleep ${RanSleep} && \1|" ${ListCron}
+    crontab ${ListCron}
   fi
 }
 
@@ -509,7 +511,6 @@ echo -e "+-----------------------------------------------------------+"
 ## 检测配置文件链接
 SourceUrl_Update
 fix_files
-#fix_config
 ## 更新shell脚本、检测配置文件版本并将sample/config.sh.sample复制到config目录下
 Git_PullShell && Update_Cron
 VerConfSample=$(grep " Version: " ${FileConfSample} | perl -pe "s|.+v((\d+\.?){3})|\1|")
@@ -553,6 +554,7 @@ else
   Change_ALL
 fi
 
+#fix_config
 ## 清除配置缓存
 [ -f ${FileConftemp} ] && rm -rf ${FileConftemp}
 
