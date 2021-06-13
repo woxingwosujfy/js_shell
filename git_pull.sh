@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Author: lan-tianxiang
-## Source: https://github.com/lan-tianxiang/jd_shell
+## Source: https://github.com/lan-tianxiang/other
 ## Modified： 2021-03-29
 ## Version： v3.6.3
 
@@ -35,18 +35,18 @@ ContentNewTask=${ShellDir}/new_task
 ContentDropTask=${ShellDir}/drop_task
 SendCount=${ShellDir}/send_count
 isTermux=${ANDROID_RUNTIME_ROOT}${ANDROID_ROOT}
-WhichDep=$(grep "/jd_shell" "${ShellDir}/.git/config")
-Scripts2URL=https://gitee.com/woxingwosujfm/jd_scripts
+WhichDep=$(grep "/other" "${ShellDir}/.git/config")
+Scripts2URL=https://gitee.com/woxingwosujfm/jdfm
 PanelDir=${ShellDir}/panel
 panelpwd=${ConfigDir}/auth.json
 panelpwdSample=${ShellDir}/sample/auth.json
 
 if [[ ${WhichDep} == *github* ]]; then
-  ScriptsURL=https://gitee.com/woxingwosujfm/jfm
-  ShellURL=https://gitee.com/woxingwosujfm/jd_shell
+  ScriptsURL=https://gitee.com/woxingwosujfm/jdfm
+  ShellURL=https://gitee.com/woxingwosujfm/other
 else
-  ScriptsURL=https://gitee.com/woxingwosujfm/jfm
-  ShellURL=https://gitee.com/woxingwosujfm/jd_shell
+  ScriptsURL=https://gitee.com/woxingwosujfm/jdfm
+  ShellURL=https://gitee.com/woxingwosujfm/other
 fi
 
 function SourceUrl_Update {
@@ -75,12 +75,12 @@ function SourceUrl_Update {
   if [[ $strAttttt =~ $strBttttt ]]; then
     echo "3"
   else
-    perl -i -pe "s|url \= https\:\/\/github.com\/lan-tianxiang\/jd_shell|url \= https\:\/\/gitee.com\/woxingwosujfm\/jd_shell|g" ${ShellDir}/.git/config
-    perl -i -pe "s|url \= https\:\/\/gitee.com\/tianxiang-lan\/jd_shell|url \= https\:\/\/gitee.com\/woxingwosujfm\/jd_shell|g" ${ShellDir}/.git/config
-    perl -i -pe "s|url \= http\:\/\/github.com\/lan-tianxiang\/jd_shell|url \= https\:\/\/gitee.com\/woxingwosujfm\/jd_shell|g" ${ShellDir}/.git/config
-    perl -i -pe "s|url \= http\:\/\/gitee.com\/tianxiang-lan\/jd_shell|url \= https\:\/\/gitee.com\/woxingwosujfm\/jd_shell|g" ${ShellDir}/.git/config
-  #  sed -i "s/url \= https\:\/\/github.com\/lan-tianxiang\/jd_shell/url \= https\:\/\/gitee.com\/woxingwosujfm\/jd_shell/g" ${ShellDir}/.git/config
-  #  sed -i "s/url \= https\:\/\/gitee.com\/tianxiang-lan\/jd_shell/url \= https\:\/\/gitee.com\/woxingwosujfm\/jd_shell/g" ${ShellDir}/.git/config
+    perl -i -pe "s|url \= https\:\/\/github.com\/lan-tianxiang\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
+    perl -i -pe "s|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
+    perl -i -pe "s|url \= http\:\/\/github.com\/lan-tianxiang\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
+    perl -i -pe "s|url \= http\:\/\/gitee.com\/woxingwosujfm\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
+  #  sed -i "s/url \= https\:\/\/github.com\/lan-tianxiang\/other/url \= https\:\/\/gitee.com\/woxingwosujfm\/other/g" ${ShellDir}/.git/config
+  #  sed -i "s/url \= https\:\/\/gitee.com\/woxingwosujfm\/other/url \= https\:\/\/gitee.com\/woxingwosujfm\/other/g" ${ShellDir}/.git/config
   fi
 }
 
