@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-## Author: lan-tianxiang
-## Source: https://github.com/lan-tianxiang/other
+## Author: woxingwosujfm
+## Source: https://github.com/woxingwosujfm/other
 ## Modified： 2021-03-29
 ## Version： v3.6.3
 
@@ -75,11 +75,11 @@ function SourceUrl_Update {
   if [[ $strAttttt =~ $strBttttt ]]; then
     echo "3"
   else
-    perl -i -pe "s|url \= https\:\/\/github.com\/lan-tianxiang\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
+    perl -i -pe "s|url \= https\:\/\/github.com\/woxingwosujfm\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
     perl -i -pe "s|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
-    perl -i -pe "s|url \= http\:\/\/github.com\/lan-tianxiang\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
+    perl -i -pe "s|url \= http\:\/\/github.com\/woxingwosujfm\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
     perl -i -pe "s|url \= http\:\/\/gitee.com\/woxingwosujfm\/other|url \= https\:\/\/gitee.com\/woxingwosujfm\/other|g" ${ShellDir}/.git/config
-  #  sed -i "s/url \= https\:\/\/github.com\/lan-tianxiang\/other/url \= https\:\/\/gitee.com\/woxingwosujfm\/other/g" ${ShellDir}/.git/config
+  #  sed -i "s/url \= https\:\/\/github.com\/woxingwosujfm\/other/url \= https\:\/\/gitee.com\/woxingwosujfm\/other/g" ${ShellDir}/.git/config
   #  sed -i "s/url \= https\:\/\/gitee.com\/woxingwosujfm\/other/url \= https\:\/\/gitee.com\/woxingwosujfm\/other/g" ${ShellDir}/.git/config
   fi
 }
