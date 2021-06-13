@@ -108,7 +108,7 @@ fix_files() {
 function Update_Cron() {
   if [ -f ${ListCron} ]; then
     local random_min=$((${RANDOM} % 60))
-    local random_sleep=$((${RANDOM} % 56))
+    local random_sleep=$((${RANDOM} % 100))
     local random_hour_array[0]=$((${RANDOM} % 3))
     local random_hour=${random_hour_array[0]}
     local i j tmp
