@@ -122,7 +122,7 @@ function Update_Cron() {
     for ((i = 1; i < ${#random_hour_array[*]}; i++)); do
       random_hour="$random_hour,${random_hour_array[i]}"
     done
-    perl -i -pe "s|.+(bash.+git_pull.+log.*)|22,44 \* \* \* \* sleep ${RanSleep} && \1|" ${ListCron}
+    perl -i -pe "s|.+(bash.+git_pull.+log.*)|22,44 \* \* \* \* sleep ${random_sleep} && \1|" ${ListCron}
     crontab ${ListCron}
   fi
 }
