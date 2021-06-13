@@ -115,7 +115,7 @@ function Update_Cron() {
 
     for ((i = 1; i < 14; i++)); do
       j=$(($i - 1))
-      tmp=$((${RANDOM} % 3)) + ${random_hour_array[j]} + 4))
+      tmp=$(($((${RANDOM} % 3)) + ${random_hour_array[j]} + 4))
       [[ $tmp -lt 24 ]] && random_hour_array[i]=$tmp || break
     done
 
